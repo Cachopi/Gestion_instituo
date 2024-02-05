@@ -14,6 +14,8 @@ class AlumnoController extends Controller
     public function index()
     {
         //
+        $alumnos = Alumno::all();
+        return view("alumnos.listado",["alumnos"=>$alumnos]);
     }
 
     /**
@@ -22,6 +24,7 @@ class AlumnoController extends Controller
     public function create()
     {
         //
+        return view ("alumnos.create");
     }
 
     /**
@@ -30,37 +33,56 @@ class AlumnoController extends Controller
     public function store(StoreAlumnoRequest $request)
     {
         //
+        $datos = $request->input();
+        $alumno = new Alumno ($datos);
+        info("Alumno: ".$alumno);
+        $alumno->save();
+//        return redirect(route("profesores.index"));
+        $alumnos = Alumno::all();
+        return view("alumnos.listado",["alumnos"=>$alumnos]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Alumno $alumno)
+    public function show(int $id)
     {
         //
+        $alumno= Alumno::find($id);
+        return view ("alumnos.edit", ['alumno'=>$alumno]);
+
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Alumno $alumno)
+    public function edit(int $id)
     {
         //
+
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAlumnoRequest $request, Alumno $alumno)
+    public function update(UpdateAlumnoRequest $request, int $id)
     {
         //
+        $alumno = Alumno::find($id);
+        $alumno->update($request->input());
+        $alumnos = Alumno::all();
+        return view ("alumnos.listado",["alumnos"=>$alumnos]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Alumno $alumno)
+    public function destroy(int $id)
     {
         //
+        $alumno = Alumno::find($id);
+        $alumno->delete();
+        $alumnos = Alumno::all();
+        return view ("alumnos.listado",["alumnos"=>$alumnos]);
     }
 }

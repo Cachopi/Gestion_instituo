@@ -19,7 +19,7 @@ use App\Http\Controllers\ProfesorController;
 
 Route::resource("profesores",ProfesorController::class);
 
-
+//gestiona las rutas
 Route::resource("alumnos", AlumnoController::class);
 
 Route::get('/', function () {

@@ -23,6 +23,9 @@ class StoreAlumnoRequest extends FormRequest
     {
         return [
             //
+            "nombre"=>"required|min:5",
+            "email"=>"email|min:5",
+            "dir"=>["required"]
         ];
     }
 }

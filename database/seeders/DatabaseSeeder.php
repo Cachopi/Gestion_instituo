@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Alumno;
 use App\Models\Profesor;
 use Illuminate\Database\Seeder;
 
@@ -19,7 +20,8 @@ class DatabaseSeeder extends Seeder
         // ]);
         $this->call([
             ProyectosSeeder::class,
-            ProfesorSeeder::class
+            ProfesorSeeder::class,
+            AlumnoSeeder::class
         ]);
     }
 }

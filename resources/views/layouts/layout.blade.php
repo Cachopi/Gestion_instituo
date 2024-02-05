@@ -16,7 +16,7 @@
 <x-layout.nav />
 
 
-<main  class="bg-main h-65v">
+<main  class="bg-main h-65v p-3" >
     @yield("contenido")
 </main>
 <footer class="h-10v bg-footer text-white">

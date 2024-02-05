@@ -18,6 +18,21 @@ class AlumnoFactory extends Factory
     {
         return [
             //
+            "nombre" => fake()->name(),
+            "dir" => fake()->address(),
+            "email" => fake()->email(),
+            "dni" => $this->dni()
         ];
+    }
+
+    private function dni()
+    {
+        $letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+        $num_dni = fake()->randomNumber(8, true);
+        $num_dni = $num_dni < 0 ? -($num_dni) : $num_dni;
+        info("número generao $num_dni");
+        $letra = $letras[$num_dni % 23];
+        $dni = "$num_dni-$letra";
+        return $dni;
     }
 }
