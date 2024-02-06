@@ -41,8 +41,10 @@ class ProfesorController extends Controller
         info("Profesor: ".$profesor);
         $profesor->save();
 //        return redirect(route("profesores.index"));
+        session()->flash("creado","se ha agregado un nuevo profesor con nombre ".$profesor['nombre']);
         $profesores = Profesor::all();
         return view("profesores.listado",["profesores"=>$profesores]);
+
 
 
         //
@@ -86,8 +88,10 @@ class ProfesorController extends Controller
     {
         $profesor = Profesor::find($id);
         $profesor->delete();
+        session()->flash("borrado","se a borrado");
         $profesores = Profesor::all();
         return view ("profesores.listado",["profesores"=>$profesores]);
+
         //
     }
 }

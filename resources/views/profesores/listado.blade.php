@@ -1,10 +1,20 @@
 @extends("layouts.layout")
 
+
 @section("contenido")
+
     <div class="overflow-x-auto max-h-full">
         <a href="{{route('profesores.create')}}">
             <button class="btn btn-secondary ">Nuevo profesor</button>
         </a>
+        @if(session()->has('borrado'))
+            <div class="alert alert-success flex justify-center items-center">{{session('borrado')}}</div>
+        @elseif(session()->has('creado'))
+            <div class="alert alert-success flex justify-center items-center">{{session('creado')}}</div>
+
+        @endif
+
+
         <table class="overflow-x-auto table-zebra table table-xs table-pin-rows table-pin-cols">
             <thead>
             <tr>
@@ -36,10 +46,12 @@
                     </td>
                     <td>
                         {{--                        Borrar--}}
-                        <form action="{{route("profesores.destroy", $profesor->id)}}" method="POST">
+                        <form action="{{route("profesores.destroy", $profesor->id)}}" method="POST"
+                              id="borrar_profesor">
                             @csrf
                             @method("DELETE")
-                            <button type="submit">
+                            <button type="submit" onclick=" event.preventDefault(); return confirmacion=confirm('esta seguro que desea eliminarlo ');
+                                if(confirmacion==true) {document.getElementById('borrar_profesor').submit();}else{return false;}">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                      stroke-width="1.5" stroke="currentColor" class=" text-red-700 w-6 h-6">
                                     <path stroke-linecap="round" stroke-linejoin="round"
@@ -56,7 +68,9 @@
             </tr>
             </tbody>
         </table>
+
     </div>
+
 @endsection
 @section("titulo")
     profesores

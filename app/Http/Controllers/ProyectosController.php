@@ -9,7 +9,11 @@ class ProyectosController extends Controller
 {
     //
     public function index(){
-        echo "Estoy en index";
+        $proyectos = Proyecto::all();
+        return view("proyectos.listado",compact("proyectos"));
 
     }
+
 }
+
+
